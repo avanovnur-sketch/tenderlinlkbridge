@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TenderHub — маркетинг / каталог</title>
+    <!-- Tailwind CDN for quick styling (you can replace with compiled CSS in production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="TenderHub — маркетинговый лендинг с каталогом, корзиной и оформлением заказа" />
+    <style>
+        /* Brand tokens — измените под ваш фирменный стиль */
+        :root {
+            --brand-1: #0f172a;
+            /* dark */
+            --brand-2: #06b6d4;
+            /* cyan */
+            --accent: #06b6d4;
+            --muted: #94a3b8;
+        }
+
+        /* Simple card hover */
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
+        }
+
+        .logo-placeholder {
+            font-weight: 700;
+            letter-spacing: 0.4px
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-slate-900 leading-6">
+    <!-- Top nav -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-4">
+                    <!-- LOGO: Replace the <img> src with your logo file (logo.png) or paste an inline SVG -->
+                    <a href="#" class="flex items-center gap-3">
+                        <!-- Example text-logo — replace or swap for your image -->
+                        <img id="siteLogo" src="assets/logo-placeholder.svg" alt="TenderHub"
+                            class="h-8 w-auto hidden" />
+                        <div class="logo-placeholder text-xl text-[var(--brand-1)]">TenderHub</div>
+                    </a>
+                    <nav class="hidden md:flex items-center gap-4 text-sm text-slate-600">
+                        <a href="#features" class="hover:underline">Что</a>
+                        <a href="#catalog" class="hover:underline">Каталог</a>
+                        <a href="#branding" class="hover:underline">Фирменный стиль</a>
+                    </nav>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="cartBtn"
+                        class="relative inline-flex items-center gap-2 px-3 py-2 bg-[var(--brand-2)] text-white rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                        </svg>
+                        <span id="cartCount">0</span>
+                    </button>
+                    <a id="contactWhats" target="_blank" rel="noopener"
+                        class="hidden md:inline-flex items-center gap-2 px-3 py-2 border rounded-md text-sm">
+                        WhatsApp / Telegram
+                    </a>
+                    <button id="menuBtn" class="md:hidden px-3 py-2">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <main class="pt-8">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-4xl font-extrabold">TenderHub — маркетинговая витрина и каталог</h1>
+                    <p class="mt-4 text-lg text-slate-600">Клон стиля Holders: каталог, карточки, фильтры, корзина и
+                        оформление заказа. Легко кастомизируется под ваш логотип и фирменные цвета.</p>
+                    <div class="mt-6 flex gap-3">
+                        <a href="#catalog"
+                            class="inline-flex items-center gap-2 px-4 py-3 bg-[var(--brand-2)] text-white rounded-md">Перейти
+                            в каталог</a>
+                        <a href="#branding" class="inline-flex items-center gap-2 px-4 py-3 border rounded-md">Фирменный
+                            стиль</a>
+                    </div>
+                </div>
+                <div class="rounded-lg bg-gradient-to-tr from-white to-slate-50 p-6 shadow-sm">
+                    <!-- Example: featured product / image -->
+                    <div class="w-full h-56 bg-gray-100 rounded-md flex items-center justify-center text-slate-400">
+                        Превью товара / баннер</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features brief -->
+        <section id="features" class="mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold">Каталог товаров</h3>
+                    <p class="text-sm text-slate-600 mt-2">Категории, карточки с изображением, ценой и кратким
+                        описанием.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold">Фильтры & категории</h3>
+                    <p class="text-sm text-slate-600 mt-2">Фильтры по цене, категории, тегам и поиском.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold">Корзина и оформление</h3>
+                    <p class="text-sm text-slate-600 mt-2">Корзина с локальным сохранением, простой чек-аут и интеграция
+                        с WhatsApp/Telegram.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog -->
+        <section id="catalog" class="mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Filters -->
+                <aside class="w-full md:w-72 bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold">Фильтры</h4>
+                    <div class="mt-4">
+                        <label class="block text-sm text-slate-600">Поиск</label>
+                        <input id="searchInput" class="mt-1 w-full border rounded-md px-3 py-2"
+                            placeholder="По названию или описанию" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm text-slate-600">Категория</label>
+                        <select id="categorySelect" class="mt-1 w-full border rounded-md px-3 py-2">
+                            <option value="all">Все</option>
+                        </select>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm text-slate-600">Цена (максимум)</label>
+                        <input id="priceRange" type="range" min="0" max="1000" value="1000" class="w-full mt-2" />
+                        <div class="text-sm text-slate-500 mt-1">До <span id="priceVal">1000</span> USD</div>
+                    </div>
+                    <div class="mt-6">
+                        <button id="resetFilters" class="w-full px-3 py-2 border rounded-md">Сбросить фильтры</button>
+                    </div>
+                </aside>
+
+                <!-- Products grid -->
+                <div class="flex-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productsGrid">
+                        <!-- JS will populate product cards here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branding / assets -->
+        <section id="branding" class="mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+                <h2 class="text-xl font-semibold">Фирменный стиль / Логотип</h2>
+                <p class="mt-2 text-sm text-slate-600">Замените логотип в папке <code>/assets</code> — файл
+                    <code>logo.png</code> или вставьте SVG в #siteLogo. Цвета указаны в :root (вверху файла).</p>
+                <div class="mt-4 flex gap-4 items-start">
+                    <div class="w-48 h-48 bg-gray-100 rounded-md flex items-center justify-center">SVG / логотип</div>
+                    <div>
+                        <p class="text-sm">Файлы для печати: если у вас будут макеты — просто загрузите их в папку
+                            <code>/assets/print</code>. Я добавлю ссылку загрузки и PDF-превью в код по вашему
+                            пожеланию.</p>
+                        <div class="mt-4 flex gap-2">
+                            <button id="downloadBrandZip" class="px-4 py-2 border rounded-md">Скачать пример
+                                ZIP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Cart drawer (hidden by default) -->
+    <aside id="cartDrawer" class="fixed right-4 top-20 w-96 bg-white rounded-lg shadow-lg p-4 hidden z-50">
+        <h3 class="font-semibold">Корзина</h3>
+        <div id="cartItems" class="mt-4 space-y-3 max-h-64 overflow-auto"></div>
+        <div class="mt-4 flex justify-between items-center">
+            <div>
+                <div class="text-sm text-slate-500">Итого</div>
+                <div class="font-bold" id="cartTotal">$0</div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <button id="checkoutBtn" class="px-4 py-2 bg-[var(--brand-2)] text-white rounded-md">Оформить</button>
+                <button id="clearCart" class="px-4 py-2 border rounded-md">Очистить</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Checkout modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg w-full max-w-2xl p-6">
+            <h3 class="font-semibold">Оформление заказа</h3>
+            <form id="checkoutForm" class="mt-4 grid grid-cols-1 gap-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <input name="name" placeholder="Имя" required class="border rounded-md px-3 py-2" />
+                    <input name="email" type="email" placeholder="Email" class="border rounded-md px-3 py-2" />
+                </div>
+                <input name="phone" placeholder="Телефон" required class="border rounded-md px-3 py-2" />
+                <input name="address" placeholder="Адрес (для доставки)" class="border rounded-md px-3 py-2" />
+                <textarea name="note" placeholder="Комментарий к заказу" class="border rounded-md px-3 py-2"></textarea>
+                <div class="flex gap-3 justify-end">
+                    <button type="button" id="closeCheckout" class="px-4 py-2 border rounded-md">Отмена</button>
+                    <button type="submit" class="px-4 py-2 bg-[var(--brand-2)] text-white rounded-md">Отправить в
+                        WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="mt-12 py-8 border-t bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-500">
+            © TenderHub — Пример макета. Сделано для быстрого старта.
+        </div>
+    </footer>
+
+    <script>
+        /* ----------------- Sample data - replace with your real catalog ----------------- */
+        const PRODUCTS = [
+            { id: 1, title: 'Premium Mug', price: 12.5, category: 'Посуда', tags: ['подарок'], img: 'https://picsum.photos/seed/p1/400/300', desc: 'Качественная керамическая чашка.' },
+            { id: 2, title: 'Branded T‑shirt', price: 22, category: 'Одежда', tags: ['new'], img: 'https://picsum.photos/seed/p2/400/300', desc: 'Футболка с логотипом.' },
+            { id: 3, title: 'Notebook A5', price: 8.9, category: 'Канцелярия', tags: ['eco'], img: 'https://picsum.photos/seed/p3/400/300', desc: 'Блокнот для заметок.' },
+            { id: 4, title: 'Sticker Pack', price: 4.5, category: 'Сувениры', tags: ['promo'], img: 'https://picsum.photos/seed/p4/400/300', desc: 'Набор наклеек.' },
+            { id: 5, title: 'Holders-like Case', price: 18.9, category: 'Аксессуары', tags: ['popular'], img: 'https://picsum.photos/seed/p5/400/300', desc: 'Чехол похожий на Holders.' },
+            { id: 6, title: 'Canvas Bag', price: 15, category: 'Сумки', tags: ['eco'], img: 'https://picsum.photos/seed/p6/400/300', desc: 'Эко-сумка для покупок.' }
+        ];
+
+        /* ----------------- App state ----------------- */
+        let state = {
+            products: PRODUCTS,
+            cart: JSON.parse(localStorage.getItem('tenderhub_cart') || '[]')
+        };
+
+        /* ----------------- Utilities ----------------- */
+        function formatPrice(v) { return '$' + Number(v).toFixed(2); }
+
+        /* ----------------- Render products ----------------- */
+        const productsGrid = document.getElementById('productsGrid');
+        const categorySelect = document.getElementById('categorySelect');
+        const searchInput = document.getElementById('searchInput');
+        const priceRange = document.getElementById('priceRange');
+        const priceVal = document.getElementById('priceVal');
+
+        function populateCategories() {
+            const cats = Array.from(new Set(state.products.map(p => p.category)));
+            cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; categorySelect.appendChild(opt); })
+        }
+
+        function renderProducts(list) {
+            productsGrid.innerHTML = '';
+            list.forEach(p => {
+                const card = document.createElement('article');
+                card.className = 'product-card bg-white rounded-lg overflow-hidden';
+                card.innerHTML = `
+          <div class="h-44 bg-gray-100 flex items-center justify-center overflow-hidden">
+            <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold">${p.title}</h4>
+            <p class="text-sm text-slate-500 mt-1">${p.desc}</p>
+            <div class="mt-3 flex justify-between items-center">
+              <div class="font-bold">${formatPrice(p.price)}</div>
+              <div class="flex items-center gap-2">
+                <button data-id="${p.id}" class="addToCart px-3 py-1 border rounded-md text-sm">Добавить</button>
+              </div>
+            </div>
+          </div>
+        `;
+                productsGrid.appendChild(card);
+            })
+            attachAddHandlers();
+        }
+
+        function attachAddHandlers() {
+            document.querySelectorAll('.addToCart').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const id = Number(e.currentTarget.dataset.id);
+                    addToCart(id);
+                })
+            })
+        }
+
+        /* ----------------- Cart ----------------- */
+        const cartBtn = document.getElementById('cartBtn');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const clearCartBtn = document.getElementById('clearCart');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function saveCart() { localStorage.setItem('tenderhub_cart', JSON.stringify(state.cart)); renderCart(); }
+
+        function addToCart(id) {
+            const product = state.products.find(p => p.id === id);
+            const item = state.cart.find(i => i.id === id);
+            if (item) item.qty += 1; else state.cart.push({ id: product.id, title: product.title, price: product.price, qty: 1 });
+            saveCart();
+            openCart();
+        }
+
+        function removeFromCart(id) { state.cart = state.cart.filter(i => i.id !== id); saveCart(); }
+        function updateQty(id, qty) { const it = state.cart.find(i => i.id === id); if (it) { it.qty = qty; if (it.qty <= 0) removeFromCart(id); saveCart(); } }
+
+        function renderCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            state.cart.forEach(i => {
+                total += i.price * i.qty;
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between gap-3';
+                row.innerHTML = `
+          <div class="flex-1 text-sm">${i.title} <div class="text-xs text-slate-500">${formatPrice(i.price)} x ${i.qty}</div></div>
+          <div class="flex items-center gap-2">
+            <button data-id="${i.id}" class="decr px-2 py-1 border rounded">-</button>
+            <button data-id="${i.id}" class="incr px-2 py-1 border rounded">+</button>
+            <button data-id="${i.id}" class="rm text-xs text-red-500">×</button>
+          </div>
+        `;
+                cartItems.appendChild(row);
+            })
+            cartCount.textContent = state.cart.reduce((s, i) => s + i.qty, 0);
+            cartTotal.textContent = formatPrice(total);
+            attachCartHandlers();
+        }
+
+        function attachCartHandlers() {
+            cartItems.querySelectorAll('.rm').forEach(b => b.addEventListener('click', e => removeFromCart(Number(e.currentTarget.dataset.id))));
+            cartItems.querySelectorAll('.incr').forEach(b => b.addEventListener('click', e => { const id = Number(e.currentTarget.dataset.id); updateQty(id, state.cart.find(i => i.id === id).qty + 1) }));
+            cartItems.querySelectorAll('.decr').forEach(b => b.addEventListener('click', e => { const id = Number(e.currentTarget.dataset.id); updateQty(id, state.cart.find(i => i.id === id).qty - 1) }));
+        }
+
+        function openCart() { cartDrawer.classList.remove('hidden'); }
+        function closeCart() { cartDrawer.classList.add('hidden'); }
+
+        cartBtn.addEventListener('click', () => { cartDrawer.classList.toggle('hidden'); })
+        clearCartBtn.addEventListener('click', () => { state.cart = []; saveCart(); })
+
+        checkoutBtn.addEventListener('click', () => {
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        })
+
+        /* ----------------- Filters logic ----------------- */
+        function applyFilters() {
+            const q = (searchInput.value || '').toLowerCase();
+            const cat = categorySelect.value;
+            const maxP = Number(priceRange.value);
+            const filtered = state.products.filter(p => {
+                const matchesQ = p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+                const matchesCat = (cat === 'all') ? true : p.category === cat;
+                const matchesP = p.price <= maxP;
+                return matchesQ && matchesCat && matchesP;
+            })
+            renderProducts(filtered);
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        categorySelect.addEventListener('change', applyFilters);
+        priceRange.addEventListener('input', () => { priceVal.textContent = priceRange.value; applyFilters(); });
+        document.getElementById('resetFilters').addEventListener('click', () => { searchInput.value = ''; categorySelect.value = 'all'; priceRange.value = 1000; priceVal.textContent = 1000; applyFilters(); })
+
+        /* ----------------- Checkout actions ----------------- */
+        const checkoutModal = document.getElementById('checkoutModal');
+        document.getElementById('closeCheckout').addEventListener('click', () => checkoutModal.classList.add('hidden'));
+        document.getElementById('checkoutForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            const payload = {
+                name: form.get('name'), phone: form.get('phone'), email: form.get('email'), address: form.get('address'), note: form.get('note'), items: state.cart
+            };
+            const message = makeOrderMessage(payload);
+            // WhatsApp intent — replace phone number with your business number if desired
+            const waNumber = '';// e.g. '79261234567' without + or spaces
+            const encoded = encodeURIComponent(message);
+            // open WhatsApp Web link
+            const waLink = waNumber ? `https://wa.me/${waNumber}?text=${encoded}` : `https://api.whatsapp.com/send?text=${encoded}`;
+            window.open(waLink, '_blank');
+            checkoutModal.classList.add('hidden');
+        })
+
+        function makeOrderMessage(payload) {
+            let text = `Новый заказ от ${payload.name || '-'}\n`;
+            text += `Телефон: ${payload.phone || '-'}\n`;
+            if (payload.email) text += `Email: ${payload.email}\n`;
+            if (payload.address) text += `Адрес: ${payload.address}\n`;
+            text += `---\n`;
+            payload.items.forEach(it => { text += `${it.title} x${it.qty} — ${formatPrice(it.price)}\n` });
+            const total = payload.items.reduce((s, i) => s + i.price * i.qty, 0);
+            text += `---\nИтого: ${formatPrice(total)}\n`;
+            if (payload.note) text += `Комментарий: ${payload.note}\n`;
+            text += `\n(Отправлено через TenderHub)`;
+            return text;
+        }
+
+        /* ----------------- Branding download (example ZIP) ----------------- */
+        document.getElementById('downloadBrandZip').addEventListener('click', () => {
+            // This demo creates a small text file inside a zip for example purposes.
+            // In real project you'd build a ZIP server-side or prepackage assets in /assets/brand.zip
+            alert('В демо-коде заглушка. Пришлите файлы фирменного стиля и я добавлю ссылку для скачивания.');
+        })
+
+        /* ----------------- Init ----------------- */
+        populateCategories();
+        applyFilters();
+        renderCart();
+
+        // Quick contact links (open chat)
+        const waBtn = document.getElementById('contactWhats');
+        waBtn.href = 'https://api.whatsapp.com/send?phone=&text=' + encodeURIComponent('Здравствуйте! Интересует заказ из TenderHub');
+        waBtn.classList.remove('hidden');
+
+        // Optional: load custom logo if you put /assets/logo.png or .svg
+        (function tryLoadLogo() {
+            const img = document.getElementById('siteLogo');
+            fetch('assets/logo.png', { method: 'HEAD' }).then(r => { if (r.ok) { img.src = 'assets/logo.png'; img.classList.remove('hidden'); document.querySelector('.logo-placeholder').style.display = 'none'; } }).catch(() => { });
+        })();
+
+    </script>
+</body>
+
+</html>

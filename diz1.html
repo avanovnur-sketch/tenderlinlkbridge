@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="ky">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TenderHub — Маркетинг демо</title>
+    <meta name="description" content="TenderHub — каталог товарлар жана дүңөтүү (демо)">
+    <style>
+        /* --- БАЗАЛЫК СТИЛЬ --- */
+        :root {
+            --bg-1: #071236;
+            /* терең көк */
+            --bg-2: #1b1450;
+            /* фиолет */
+            --accent: #7b5cff;
+            /* фиолет-жаш */
+            --card: rgba(255, 255, 255, 0.04);
+            --glass: rgba(255, 255, 255, 0.04);
+            --text: #e6e8ff;
+            --muted: #b9b7d8;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+            background: radial-gradient(ellipse at 10% 10%, rgba(123, 92, 255, 0.06), transparent 5%), radial-gradient(ellipse at 90% 80%, rgba(0, 160, 255, 0.02), transparent 5%), linear-gradient(180deg, var(--bg-1), var(--bg-2));
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            padding: 32px;
+            background-attachment: fixed;
+        }
+
+        /* subtle star field using repeating-radial-gradient */
+        .stars::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.6px),
+                radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.5) 0.6px, transparent 0.8px),
+                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.4) 0.4px, transparent 0.6px);
+            background-size: 100% 100%;
+            opacity: 0.6;
+            mix-blend-mode: screen;
+            filter: blur(0.6px);
+        }
+
+        .container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px
+        }
+
+        .brand {
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column
+        }
+
+        .logo .name {
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 1px;
+            color: var(--text)
+        }
+
+        .logo .sub {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .search {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        input[type=search] {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: var(--text);
+            min-width: 280px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        button {
+            background: linear-gradient(90deg, var(--accent), #5b3cff);
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer
+        }
+
+        .ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06)
+        }
+
+        /* layout */
+        main {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px
+        }
+
+        aside {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .regions {
+            font-size: 13px
+        }
+
+        .regions li {
+            padding: 6px 8px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        .regions li:hover {
+            background: rgba(123, 92, 255, 0.08)
+        }
+
+        .catalog-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .thumb {
+            height: 150px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--muted)
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .price {
+            font-weight: 700
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .chips {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-size: 13px
+        }
+
+        /* cart */
+        .cart-btn {
+            position: relative
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 999px;
+            padding: 3px 7px;
+            font-size: 12px
+        }
+
+        .cart-drawer {
+            position: fixed;
+            right: 20px;
+            top: 80px;
+            width: 360px;
+            background: linear-gradient(180deg, rgba(10, 10, 20, 0.95), rgba(10, 10, 30, 0.95));
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 30px rgba(10, 10, 20, 0.7)
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.03)
+        }
+
+        footer {
+            margin-top: 28px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center
+        }
+
+        /* responsive */
+        @media(max-width:900px) {
+            main {
+                grid-template-columns: 1fr
+            }
+
+            aside {
+                order: 2
+            }
+
+            .logo .name {
+                font-size: 18px
+            }
+
+            input[type=search] {
+                min-width: 140px
+            }
+        }
+    </style>
+</head>
+
+<body class="stars">
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo">
+                    <!-- Замените на ваш логотип: вставьте <img src="/path/to/logo.png"> -->
+                    <div class="name">TenderHub</div>
+                    <div class="sub">Кыргызстан 🇰🇬 — Товар маркетинги</div>
+                </div>
+                <div style="font-size:13px;color:var(--muted)">Каталог &amp; Дүкөн — стилизация Holders</div>
+            </div>
+
+            <div class="search">
+                <input id="q" type="search" placeholder="Издөө — үлгү: футболка, аксессуар">
+                <button id="searchBtn" class="ghost">Издөө</button>
+                <div class="actions">
+                    <button id="whatsapp" title="WhatsApp менен байланыш">WhatsApp</button>
+                    <button id="telegram" title="Telegram менен байланыш">Telegram</button>
+                    <button id="cartBtn" class="cart-btn">Корзина <span id="cartCount" class="cart-count"
+                            style="display:none">0</span></button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <aside>
+                <h3>Региондор — Кыргызстандын райондор</h3>
+                <ul class="regions" id="regionsList">
+                    <!-- Мисал региондор -->
+                </ul>
+
+                <h4 style="margin-top:12px">Фильтрлер</h4>
+                <div class="filters" id="filterContainer">
+                    <div class="chips" data-cat="all">Бардыгы</div>
+                    <div class="chips" data-cat="electronics">Электроника</div>
+                    <div class="chips" data-cat="fashion">Жаңы үлгү</div>
+                    <div class="chips" data-cat="home">Үй үчүн</div>
+                    <div class="chips" data-cat="gifts">Сыйлыктар</div>
+                </div>
+
+                <h4 style="margin-top:12px">Фирмен стиль</h4>
+                <p style="color:var(--muted);font-size:13px">Түстөр: терең көк + фиолет (acc: #7b5cff). Фон — түнкү
+                    асман менен жылдыздар. Алфавит: кирилл.</p>
+
+                <h4 style="margin-top:12px">Файлдар</h4>
+                <p style="color:var(--muted);font-size:13px">Эгер принт үчүн файлдар керек болсо, презентация
+                    кулаткандан кийин мен сүрөттөрдү жана PSD/PNG/AI талаптарын кошуп берем.</p>
+            </aside>
+
+            <section>
+                <div class="catalog-top">
+                    <div>
+                        <h2 style="margin:0">Каталог</h2>
+                        <p style="margin:0;color:var(--muted);font-size:13px">Тандалган товарлар — адаптив карточкалар
+                        </p>
+                    </div>
+                    <div>
+                        <span id="sortLabel" style="color:var(--muted);font-size:13px">Сорттоо:</span>
+                        <select id="sort"
+                            style="background:transparent;color:var(--text);border-radius:8px;padding:6px;border:1px solid rgba(255,255,255,0.04)">
+                            <option value="pop">Популярдуулук</option>
+                            <option value="price-asc">Баасы: төмөндөн жогору</option>
+                            <option value="price-desc">Баасы: жогорудан төмөнгө</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid" id="productGrid">
+                    <!-- карточкалар динамик түрдө толот -->
+                </div>
+
+            </section>
+        </main>
+
+        <footer>
+            © TenderHub — Демонстрациялык сайт. Бардык укуктар сакталат.
+        </footer>
+
+        <!-- Корзина драфт (жашыруун) -->
+        <div id="cartDrawer" style="display:none" class="cart-drawer">
+            <h3>Корзина</h3>
+            <div id="cartItems"></div>
+            <div style="display:flex;justify-content:space-between;padding-top:10px;align-items:center">
+                <strong>Бардыгы:</strong>
+                <strong id="cartTotal">0 сом</strong>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+                <button id="checkout">Буйрутма берүү</button>
+                <button id="closeCart" class="ghost">Жабуу</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Тест продукттар ---
+        const PRODUCTS = [
+            { id: 1, title: 'TenderHub стакан (металл)', cat: 'gifts', price: 450, desc: 'Ыңгайлуу, стильдүү металл стакан.', 'img': '☕' },
+            { id: 2, title: 'Киргиз стиль футболка', cat: 'fashion', price: 1200, desc: 'Киргиз мотивдүү дизайн.', 'img': '👕' },
+            { id: 3, title: 'USB Power Bank', cat: 'electronics', price: 1800, desc: 'Өзүң менен ар дайым кубаттанып жүрүңүз.', 'img': '🔋' },
+            { id: 4, title: 'Дизайн плакат (A3)', cat: 'home', price: 800, desc: 'Принт үчүн файлдар даяр.', 'img': '🖼️' },
+            { id: 5, title: 'Holder-клондор үчүн аксессуар', cat: 'electronics', price: 650, desc: 'Үй жана офис үчүн аксессуар.', 'img': '🔌' }
+        ];
+
+        const REGIONS = ['Бишкек', 'Ош', 'Жалал-Абад', 'Баткен', 'Ысык-Көл', 'Нарын', 'Талас', 'Чүй', 'Ысык-Көл обл.'];
+
+        // UI элементтер
+        const grid = document.getElementById('productGrid');
+        const regionsList = document.getElementById('regionsList');
+        const filterContainer = document.getElementById('filterContainer');
+        const cartBtn = document.getElementById('cartBtn');
+        const cartCount = document.getElementById('cartCount');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkout');
+        const closeCartBtn = document.getElementById('closeCart');
+
+        let CART = JSON.parse(localStorage.getItem('tenderhub_cart') || '{}');
+
+        function saveCart() { localStorage.setItem('tenderhub_cart', JSON.stringify(CART)); renderCartCount(); }
+        function renderCartCount() { const qty = Object.values(CART).reduce((s, v) => s + v, 0); if (qty) { cartCount.style.display = 'inline-block'; cartCount.textContent = qty } else cartCount.style.display = 'none' }
+
+        function renderRegions() { regionsList.innerHTML = ''; REGIONS.forEach(r => { const li = document.createElement('li'); li.textContent = r; li.onclick = () => { alert('Фильтр: ' + r) }; regionsList.appendChild(li) }) }
+
+        function renderProducts(products) { grid.innerHTML = ''; products.forEach(p => { const card = document.createElement('div'); card.className = 'card'; card.innerHTML = `<div class="thumb">${p.img}</div><div><strong>${p.title}</strong></div><p>${p.desc}</p><div class="meta"><div class="price">${p.price} сом</div><div><button onclick="addToCart(${p.id})">Кошуу</button></div></div>`; grid.appendChild(card) }) }
+
+        function addToCart(id) { CART[id] = (CART[id] || 0) + 1; saveCart(); showCart(); }
+
+        function showCart() { renderCart(); cartDrawer.style.display = 'block' }
+
+        function renderCart() { cartItemsEl.innerHTML = ''; let total = 0; for (const id in CART) { const qty = CART[id]; const p = PRODUCTS.find(x => x.id == id); if (!p) continue; total += p.price * qty; const div = document.createElement('div'); div.className = 'cart-item'; div.innerHTML = `<div style="width:48px;height:48px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center">${p.img}</div><div style="flex:1"><div style='font-weight:600'>${p.title}</div><div style='font-size:13px;color:var(--muted)'>${p.price} сом × ${qty}</div></div><div style='display:flex;flex-direction:column;gap:6px'><button onclick='inc(${id})'>+</button><button onclick='dec(${id})' style='background:transparent'>-</button></div>`; cartItemsEl.appendChild(div) } cartTotalEl.textContent = total + ' сом' }
+
+        function inc(id) { CART[id] = (CART[id] || 0) + 1; saveCart(); renderCart(); renderCartCount(); }
+        function dec(id) { if (!CART[id]) return; CART[id] -= 1; if (CART[id] <= 0) delete CART[id]; saveCart(); renderCart(); }
+
+        closeCartBtn.onclick = () => cartDrawer.style.display = 'none';
+        checkoutBtn.onclick = () => {
+            const name = prompt('Атыңызды киргизиңиз');
+            const phone = prompt('Телефон номериңиз');
+            if (!name || !phone) { alert('Маалымат толтуруңуз'); return }
+            // Сюда можно добавить интеграция с сервером/WhatsApp
+            const summary = Object.keys(CART).map(id => { const p = PRODUCTS.find(x => x.id == id); return p ? `${p.title} x ${CART[id]}` : '' }).join('%0A');
+            const message = `Буйрутма%0A${summary}%0AАты: ${encodeURIComponent(name)}%0AТел: ${encodeURIComponent(phone)}`;
+            // WhatsApp link
+            window.open('https://wa.me/?text=' + message, '_blank');
+        }
+
+        // Фильтрлар
+        filterContainer.addEventListener('click', e => { const chip = e.target.closest('.chips'); if (!chip) return; const cat = chip.dataset.cat; if (cat === 'all') renderProducts(PRODUCTS); else renderProducts(PRODUCTS.filter(p => p.cat === cat)) })
+
+        // Сорт
+        document.getElementById('sort').addEventListener('change', e => {
+            const v = e.target.value; let arr = [...PRODUCTS]; if (v === 'price-asc') arr.sort((a, b) => a.price - b.price); if (v === 'price-desc') arr.sort((a, b) => b.price - a.price); renderProducts(arr);
+        })
+
+        // Search
+        document.getElementById('searchBtn').addEventListener('click', () => { const q = document.getElementById('q').value.toLowerCase(); renderProducts(PRODUCTS.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))) })
+
+        // WhatsApp / Telegram quick
+        document.getElementById('whatsapp').addEventListener('click', () => {
+            window.open('https://wa.me/?text=' + encodeURIComponent('Салам, мен TenderHub аркылуу суроо бар'), '_blank')
+        });
+        document.getElementById('telegram').addEventListener('click', () => {
+            window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('Салам, сураныч жардам бериңиз'));
+        });
+
+        // init
+        renderRegions(); renderProducts(PRODUCTS); renderCartCount();
+
+        // expose small functions to window (for buttons inside generated HTML)
+        window.addToCart = addToCart; window.inc = inc; window.dec = dec;
+
+    </script>
+</body>
+
+</html>

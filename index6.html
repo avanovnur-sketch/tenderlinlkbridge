@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ethereum — Demo (по макету)</title>
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --card: #fff;
+            --accent: #2f5bd8;
+            --accent-dark: #2745b0;
+            --text: #0e2740;
+            --muted: #61708a;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, system-ui, Segoe UI, Arial;
+            color: var(--text);
+            background: var(--bg);
+            margin: 0;
+            -webkit-font-smoothing: antialiased
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 24px;
+            background: transparent
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px
+        }
+
+        .navlinks {
+            margin-left: 20px;
+            flex: 1
+        }
+
+        .navlinks a {
+            margin-right: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 26px auto;
+            padding: 0 20px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(16, 24, 40, 0.06);
+            margin-bottom: 18px
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 28px
+        }
+
+        .hero-left h1 {
+            font-size: 30px;
+            margin: 0 0 8px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .cta-row {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .btn.small {
+            padding: 8px 12px
+        }
+
+        .primary {
+            background: var(--accent);
+            color: white
+        }
+
+        .ghost {
+            background: transparent;
+            border: 1px solid #e3eefb;
+            color: var(--text)
+        }
+
+        .hero-right img {
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(16, 24, 40, 0.08)
+        }
+
+        .small-grid {
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            text-align: center
+        }
+
+        .small-grid h3 {
+            margin: 0;
+            font-size: 20px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .step {
+            padding: 12px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #fff, #fbfdff)
+        }
+
+        .gallery-row {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .gallery-row img {
+            width: 31%;
+            border-radius: 8px;
+            object-fit: cover
+        }
+
+        .reviews .review-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px
+        }
+
+        blockquote {
+            background: #fbfdff;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 0
+        }
+
+        .footer {
+            text-align: center;
+            padding: 26px;
+            color: var(--muted)
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(12, 20, 40, 0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .18s
+        }
+
+        .modal[aria-hidden="false"] {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .modal-dialog {
+            background: var(--card);
+            padding: 18px;
+            border-radius: 12px;
+            min-width: 320px;
+            max-width: 720px;
+            position: relative
+        }
+
+        .modal-dialog.wide {
+            max-width: 900px
+        }
+
+        .close {
+            position: absolute;
+            right: 12px;
+            top: 8px;
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            cursor: pointer
+        }
+
+        .wallet-list {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap
+        }
+
+        .wallet {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #eef6ff;
+            background: #fbfdff;
+            cursor: pointer;
+            min-width: 150px;
+            justify-content: center
+        }
+
+        .wallet img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            border-radius: 6px
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px
+        }
+
+        input,
+        textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e6eef9;
+            width: 100%;
+            font-size: 15px
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical
+        }
+
+        .toast {
+            margin-top: 14px;
+            background: #e6ffed;
+            color: #064d2b;
+            padding: 10px;
+            border-radius: 8px
+        }
+
+        /* Floating notification */
+        .floating-toast {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 9999;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: var(--accent-dark);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(16, 24, 40, 0.12);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all .3s
+        }
+
+        /* small screens */
+        @media (max-width:880px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .gallery-row {
+                flex-direction: column
+            }
+
+            .gallery-row img {
+                width: 100%
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .reviews .review-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero-right img {
+                width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="logo">Ethereum</div>
+        <nav class="navlinks">
+            <a href="#">Главная</a>
+            <a href="#">Тендеры</a>
+            <a href="#">Контракты</a>
+            <a href="#">Профиль</a>
+        </nav>
+        <button class="btn small" id="connectBtn">Подключить кошелёк</button>
+    </header>
+
+    <main class="container">
+        <section class="hero card">
+            <div class="hero-left">
+                <h1>Ethereum — система для сделок и тендеров</h1>
+                <p class="muted">Безопасные контракты на базе блокчейна.</p>
+                <div class="cta-row">
+                    <button class="btn primary" id="createContractMain">Создать контракт</button>
+                    <button class="btn ghost" id="viewTenders">Просмотреть тендеры</button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <!-- Подставь здесь свой главный скриншот -->
+                <img src="A_digital_user_interface_screenshot_displays_a_mod.png" alt="hero image"
+                    onerror="this.style.opacity=0.6" />
+            </div>
+        </section>
+
+        <section class="stats card small-grid">
+            <div>
+                <h3 id="activeContracts">1,243</h3>
+                <p class="muted">Активных контрактов</p>
+            </div>
+            <div>
+                <h3 id="onlineUsers">87</h3>
+                <p class="muted">Онлайн пользователей</p>
+            </div>
+            <div>
+                <h3 id="completedToday">56</h3>
+                <p class="muted">Выполнено сегодня</p>
+            </div>
+        </section>
+
+        <section class="how card">
+            <h2>Как это работает</h2>
+            <div class="grid">
+                <div class="step"><strong>1.</strong> Создайте кошелёк<br /><small class="muted">MetaMask, Trust
+                        Wallet</small></div>
+                <div class="step"><strong>2.</strong> Заключите контракт<br /><small class="muted">Опишите
+                        условия</small></div>
+                <div class="step"><strong>3.</strong> Подпишите транзакцию<br /><small class="muted">Подтвердите в
+                        сети</small></div>
+                <div class="step"><strong>4.</strong> Получите результат<br /><small class="muted">Смарт-контракт
+                        исполнен</small></div>
+            </div>
+        </section>
+
+        <section class="gallery card">
+            <h2>Экран — подключения и формы</h2>
+            <div class="gallery-row">
+                <!-- Заменяй src на свои файлы, если имеют другие имена -->
+                <img src="A_digital_user_interface_screenshot_displays_a_mod.png" alt="connect screen">
+                <img src="A_digital_user_interface_design_in_the_image_displ.png" alt="success screen">
+                <img src="A_digital_screenshot_displays_a_user_interface_(UI.png" alt="create screen">
+            </div>
+        </section>
+
+        <section class="reviews card">
+            <h2>Отзывы пользователей</h2>
+            <div class="review-grid">
+                <blockquote>«Ethereum-система позволила нам безопасно проводить тендеры без посредников!»<footer>—
+                        Алексей, менеджер проектов</footer>
+                </blockquote>
+                <blockquote>«Прозрачность операций впечатляет. Всё видно в блокчейне!»<footer>— Марина, юрист</footer>
+                </blockquote>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">© Demo — Ethereum UI</footer>
+
+    <!-- Modals -->
+    <div class="modal" id="walletModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <button class="close" data-close>&times;</button>
+            <h3>Подключение кошелька</h3>
+            <p>Выберите кошелёк:</p>
+            <div class="wallet-list">
+                <button class="wallet" data-wallet="metamask">
+                    <img src="A_digital_user_interface_screenshot_displays_a_mod.png" alt="mm icon" /> MetaMask
+                </button>
+                <button class="wallet" data-wallet="trust">
+                    <img src="A_digital_user_interface_design_in_the_image_displ.png" alt="tw icon" /> Trust Wallet
+                </button>
+                <button class="wallet" data-wallet="emulate">Эмуляция</button>
+            </div>
+            <p style="margin-top:12px;color:var(--muted);font-size:13px">Если в браузере установлен MetaMask — сайт
+                предложит подключиться через него.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <button class="close" data-close>&times;</button>
+            <div style="font-size:38px;color:green;">✓</div>
+            <h3 id="successTitle">Кошелёк успешно подключён</h3>
+            <p id="successMsg">Теперь вы можете создавать контракты и участвовать в тендерах.</p>
+            <div class="actions-row">
+                <button class="btn primary" id="openCreate">Создать контракт</button>
+                <button class="btn ghost" data-close>Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="createModal" aria-hidden="true">
+        <div class="modal-dialog wide">
+            <button class="close" data-close>&times;</button>
+            <h3>Создать новый смарт-контракт</h3>
+            <form id="contractForm">
+                <div class="form-row">
+                    <input id="cName" required placeholder="Название контракта" />
+                    <input id="cAmount" required placeholder="Сумма (в ETH)" />
+                </div>
+                <textarea id="cDesc" placeholder="Описание сделки"></textarea>
+                <div class="form-row">
+                    <input id="cAddress" placeholder="Адрес получателя" />
+                    <input id="cDate" type="date" />
+                </div>
+                <div class="actions-row">
+                    <button class="btn primary" type="submit">Опубликовать в блокчейне</button>
+                    <button class="btn ghost" type="button" data-close>Отмена</button>
+                </div>
+            </form>
+            <div id="createToast" class="toast" hidden>Контракт опубликован! 🎉</div>
+        </div>
+    </div>
+
+    <script>
+        /*
+          index.html script:
+          - Попытка реального подключения MetaMask (если обнаружен window.ethereum)
+          - Если MetaMask отсутствует или пользователь выбрал "Эмуляция", выполняется имитация подключения
+          - После подключения — можно открыть форму создания контракта и "опубликовать" (эмуляция)
+        */
+
+        /* helpers for modals */
+        function openModal(el) { el.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+        function closeModal(el) { el.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+
+        /* floating notification */
+        function showFloating(msg) {
+            const el = document.createElement('div');
+            el.className = 'floating-toast';
+            el.textContent = msg;
+            document.body.appendChild(el);
+            requestAnimationFrame(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                setTimeout(() => el.remove(), 400);
+            }, 2600);
+        }
+
+        /* DOM ready */
+        document.addEventListener('DOMContentLoaded', () => {
+            const walletModal = document.getElementById('walletModal');
+            const successModal = document.getElementById('successModal');
+            const createModal = document.getElementById('createModal');
+
+            const connectBtn = document.getElementById('connectBtn');
+            const createContractMain = document.getElementById('createContractMain');
+            const openCreate = document.getElementById('openCreate');
+
+            connectBtn.addEventListener('click', () => openModal(walletModal));
+            createContractMain.addEventListener('click', () => {
+                if (window.demoWalletConnected) openModal(createModal);
+                else openModal(walletModal);
+            });
+
+            document.querySelectorAll('[data-close]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const modal = e.target.closest('.modal');
+                    if (modal) closeModal(modal);
+                });
+            });
+
+            // Wallet buttons: MetaMask, Trust, Emulate
+            document.querySelectorAll('.wallet').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const type = btn.getAttribute('data-wallet');
+                    btn.disabled = true;
+                    const oldText = btn.innerHTML;
+                    btn.innerHTML = 'Подключение...';
+
+                    // If user selected emulate -> skip real connection
+                    if (type === 'emulate') {
+                        await new Promise(r => setTimeout(r, 700 + Math.random() * 600));
+                        finalizeConnect('Эмуляция', '0x' + Math.random().toString(16).slice(2, 10));
+                        return;
+                    }
+
+                    // Try MetaMask/ethereum provider
+                    if (window.ethereum) {
+                        try {
+                            // request accounts
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts && accounts[0] ? accounts[0] : ('0x' + Math.random().toString(16).slice(2, 10));
+                            finalizeConnect(type === 'metamask' ? 'MetaMask' : 'Wallet', address);
+                        } catch (err) {
+                            console.warn('User rejected or error', err);
+                            btn.innerHTML = oldText;
+                            btn.disabled = false;
+                            showFloating('Подключение отменено');
+                        }
+                    } else {
+                        // No provider — show message and fallback to emulate
+                        btn.innerHTML = oldText;
+                        btn.disabled = false;
+                        closeModal(walletModal);
+                        showFloating('MetaMask не найден — используется эмуляция');
+                        setTimeout(() => {
+                            openModal(walletModal);
+                            // set emulate button state visually
+                        }, 400);
+                    }
+                });
+            });
+
+            function finalizeConnect(providerName, address) {
+                window.demoWalletConnected = true;
+                window.demoWalletProvider = providerName;
+                window.demoWalletAddress = address;
+                // reset wallet buttons
+                document.querySelectorAll('.wallet').forEach(w => { w.disabled = false; });
+                closeModal(walletModal);
+                document.getElementById('successTitle').textContent = 'Кошелёк подключён: ' + providerName;
+                document.getElementById('successMsg').textContent = 'Адрес: ' + address;
+                openModal(successModal);
+                showFloating('Кошелёк подключён: ' + address);
+            }
+
+            // open create from success
+            openCreate.addEventListener('click', () => {
+                closeModal(successModal);
+                openModal(createModal);
+            });
+
+            // create contract form handling
+            const form = document.getElementById('contractForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('cName').value.trim();
+                if (!name) { alert('Введите название контракта'); return; }
+                // simulate publishing
+                const toast = document.getElementById('createToast');
+                toast.hidden = false;
+                setTimeout(() => {
+                    toast.hidden = true;
+                    closeModal(createModal);
+                    // bump counters to feel alive
+                    const ac = document.getElementById('activeContracts');
+                    ac.textContent = (parseInt(ac.textContent.replace(/\D/g, '')) + Math.floor(1 + Math.random() * 4)).toString();
+                    const ct = document.getElementById('completedToday');
+                    ct.textContent = (parseInt(ct.textContent.replace(/\D/g, '')) + 1).toString();
+                    showFloating('Контракт опубликован в блокчейне! 🎉');
+                }, 900 + Math.random() * 1000);
+            });
+
+            // make gallery images open a quick preview
+            document.querySelectorAll('.gallery-row img').forEach(img => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    // quick lightbox using success modal
+                    const title = document.getElementById('successTitle');
+                    const msg = document.getElementById('successMsg');
+                    title.textContent = 'Просмотр экрана';
+                    msg.innerHTML = '<img src="' + img.src + '" alt="" style="width:100%;border-radius:8px"/>';
+                    openModal(successModal);
+                });
+            });
+
+            // small live users wiggle
+            setInterval(() => {
+                const el = document.getElementById('onlineUsers');
+                if (!el) return;
+                el.textContent = Math.max(3, parseInt(el.textContent) + (Math.random() > 0.55 ? 1 : -1));
+            }, 4200);
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TenderHub - Holders</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            color: #ffcc00;
+            font-size: 28px;
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffea00;
+        }
+
+        .section {
+            padding: 50px 20px;
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #ffcc00;
+            color: #000;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #ffd633;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin-bottom: 5px;
+        }
+
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+        }
+
+        .cart h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-items li {
+            margin-bottom: 5px;
+        }
+
+        .cart-items button {
+            margin-left: 5px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stats div {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>TenderHub</h1>
+        <nav>
+            <a href="#about">О сервисе</a>
+            <a href="#products">Продукты</a>
+            <a href="#partners">Партнеры</a>
+            <a href="#stats">Статистика</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
+
+    <section class="section" id="about">
+        <h2>Некарантинный способ осуществления обычных платежей</h2>
+        <p>Платите криптовалютой везде самым удобным и безопасным способом. Держатели предоставляют полный контроль над
+            вашими цифровыми активами. Доступ к закрытым ключам есть только у вас.</p>
+        <p>Финансовая революция уже на горизонте… Некастодиальные кошельки, партнерство с лицензированными биржами,
+            надежные эмитенты карт и безопасность прежде всего.</p>
+        <a href="#" class="button">Попробуйте держатели</a>
+    </section>
+
+    <section class="section" id="products">
+        <h2>Продукты и услуги</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Некастодиальный кошелек">
+                <h3>Некастодиальный кошелек</h3>
+                <p>Полный контроль над активами, поддержка мультичейн.</p>
+                <button onclick="addToCart('Некастодиальный кошелек')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Платежная карта">
+                <h3>Платежная карта</h3>
+                <p>Поддержка Apple Pay/Google Pay, мгновенные пополнения.</p>
+                <button onclick="addToCart('Платежная карта')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Лицензированная биржа">
+                <h3>Лицензированная биржа</h3>
+                <p>Автоматический обмен криптовалюты через партнеров.</p>
+                <button onclick="addToCart('Лицензированная биржа')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="TonGuard">
+                <h3>TonGuard</h3>
+                <p>Облачное решение для блокчейна TON, проверка транзакций и кошельков.</p>
+                <button onclick="addToCart('TonGuard')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="TonHub">
+                <h3>TonHub</h3>
+                <p>Сторонний продукт для удобного использования кошельков.</p>
+                <button onclick="addToCart('TonHub')">В корзину</button>
+            </div>
+            <!-- Добавим еще товары до 20+ -->
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Валлиексер">
+                <h3>Валлиексер</h3>
+                <p>Криптобиржа для быстрых транзакций с фиатом и криптой.</p>
+                <button onclick="addToCart('Валлиексер')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Уоллестер">
+                <h3>Уоллестер</h3>
+                <p>Финансовое учреждение с лицензией ЕС, выпускает карты VISA.</p>
+                <button onclick="addToCart('Уоллестер')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="SumSub">
+                <h3>SumSub</h3>
+                <p>Платформа верификации, помогает соблюсти KYC/AML.</p>
+                <button onclick="addToCart('SumSub')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="ТОННА">
+                <h3>ТОННА</h3>
+                <p>Партнерская блокчейн-сеть с низкими комиссиями и высокой скоростью.</p>
+                <button onclick="addToCart('ТОННА')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Виза">
+                <h3>Виза</h3>
+                <p>Глобальная организация, поддержка цифровых платежей и карт.</p>
+                <button onclick="addToCart('Виза')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="ОКХ">
+                <h3>ОКХ</h3>
+                <p>Криптобиржа для обменных операций через TenderHub.</p>
+                <button onclick="addToCart('ОКХ')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Люмос">
+                <h3>Люмос</h3>
+                <p>Мультичейн-кошелек для цифровых кочевников.</p>
+                <button onclick="addToCart('Люмос')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="ХТХ">
+                <h3>ХТХ</h3>
+                <p>Одна из ведущих мировых криптобирж в Holders.</p>
+                <button onclick="addToCart('ХТХ')">В корзину</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250" alt="Безлимитный">
+                <h3>Безлимитный</h3>
+                <p>Провайдер услуг обработки платежей на международном уровне.</p>
+                <button onclick="addToCart('Безлимитный')">В корзину</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="cart">
+        <h3>Корзина</h3>
+        <ul class="cart-items" id="cartItems"></ul>
+        <button onclick="checkout()">Оплатить</button>
+    </div>
+
+    <section class="section" id="partners">
+        <h2>Партнеры и проверка</h2>
+        <p>Мы сотрудничаем с надежными кошельками, биржами и финансовыми учреждениями. Проверка KYT, KYC, AML и Adverse
+            Media обеспечивает максимальную безопасность.</p>
+    </section>
+
+    <section class="section" id="stats">
+        <h2>Статистика и охват</h2>
+        <div class="stats">
+            <div>
+                <h3>420 млн+</h3>
+                <p>Держатели криптовалют</p>
+            </div>
+            <div>
+                <h3>140 млн</h3>
+                <p>Возможные юрисдикции</p>
+            </div>
+            <div>
+                <h3>5 млн</h3>
+                <p>Клиенты за 5 лет</p>
+            </div>
+            <div>
+                <h3>180 млн</h3>
+                <p>Юго-Восточная Азия</p>
+            </div>
+            <div>
+                <h3>55 млн</h3>
+                <p>Ближний Восток</p>
+            </div>
+            <div>
+                <h3>54 млн</h3>
+                <p>Северная Америка</p>
+            </div>
+            <div>
+                <h3>38 млн</h3>
+                <p>Африка</p>
+            </div>
+            <div>
+                <h3>33 млн</h3>
+                <p>Южная Америка</p>
+            </div>
+            <div>
+                <h3>31 млн</h3>
+                <p>Европейский Союз</p>
+            </div>
+            <div>
+                <h3>25 млн</h3>
+                <p>СНГ</p>
+            </div>
+            <div>
+                <h3>15 млн</h3>
+                <p>Океания</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Контакты и сотрудничество</h2>
+        <p>Станьте нашим партнером и выпустите криптокарты для своих клиентов вместе с нами уже сегодня.</p>
+        <a href="#" class="button">Начать сотрудничество</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 TenderHub. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const cart = [];
+        const cartItems = document.getElementById('cartItems');
+        function addToCart(item) { cart.push(item); renderCart(); }
+        function renderCart() { cartItems.innerHTML = ''; cart.forEach((item, index) => { const li = document.createElement('li'); li.textContent = item + ' '; const btn = document.createElement('button'); btn.textContent = '❌'; btn.onclick = () => removeFromCart(index); li.appendChild(btn); cartItems.appendChild(li); }); }
+        function removeFromCart(index) { cart.splice(index, 1); renderCart(); }
+        function checkout() { if (cart.length === 0) { alert('Корзина пуста!'); } else { alert('Спасибо за покупку: ' + cart.join(', ')); cart.length = 0; renderCart(); } }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ky">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TenderHub — Holders 스타일 Klон (демо)</title>
+    <meta name="description" content="TenderHub — Маркетинг дүкөн (Holders стилинде) — Кыргызстан" />
+    <style>
+        :root {
+            --bg-1: #06071a;
+            --bg-2: #0f0b2a;
+            --accent-1: #7b5cff;
+            /* фиолет */
+            --accent-2: #4b8bff;
+            /* көк */
+            --glass: rgba(255, 255, 255, 0.04);
+            --muted: #b8b7d8;
+            --text: #eef0ff;
+            --card-radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(123, 92, 255, 0.06), transparent 6%),
+                radial-gradient(ellipse at 90% 80%, rgba(75, 139, 255, 0.03), transparent 8%),
+                linear-gradient(180deg, var(--bg-1), var(--bg-2));
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            padding: 28px;
+        }
+
+        /* STARFIELD */
+        .stars::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.75) 0.6px, transparent 0.8px),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.55) 0.5px, transparent 0.7px),
+                radial-gradient(circle at 88% 35%, rgba(255, 255, 255, 0.6) 0.6px, transparent 0.8px);
+            background-size: cover;
+            opacity: 0.6;
+            filter: blur(0.6px);
+        }
+
+        .wrap {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo .mark {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            box-shadow: 0 6px 20px rgba(75, 50, 140, 0.25)
+        }
+
+        .logo .text {
+            line-height: 1
+        }
+
+        .logo .title {
+            font-size: 20px;
+            font-weight: 800
+        }
+
+        .logo .sub {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .nav-link {
+            color: var(--muted);
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 10px
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text)
+        }
+
+        .searchbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .searchbar input {
+            background: transparent;
+            border: 0;
+            outline: none;
+            color: var(--text);
+            min-width: 220px
+        }
+
+        .btn {
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 0;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            font-weight: 600
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text)
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            align-items: start
+        }
+
+        aside {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            padding: 16px;
+            border-radius: var(--card-radius);
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        aside h4 {
+            margin: 0 0 10px 0
+        }
+
+        .regions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .region {
+            padding: 8px;
+            border-radius: 10px;
+            color: var(--muted);
+            cursor: pointer
+        }
+
+        .region:hover {
+            background: rgba(123, 92, 255, 0.06);
+            color: var(--text)
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(123, 92, 255, 0.08), rgba(75, 139, 255, 0.03));
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.02)
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 28px
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            color: var(--muted)
+        }
+
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--muted);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.02)
+        }
+
+        .chip.active {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            color: white;
+            border: 0
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform .18s ease, box-shadow .18s ease
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(10, 10, 30, 0.6)
+        }
+
+        .thumb {
+            height: 140px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--muted);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01))
+        }
+
+        .card .title {
+            font-weight: 700
+        }
+
+        .card .desc {
+            font-size: 13px;
+            color: var(--muted);
+            min-height: 36px
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px
+        }
+
+        /* cart drawer */
+        .cart-toggle {
+            position: relative
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-1);
+            padding: 4px 7px;
+            border-radius: 999px;
+            font-size: 12px;
+            color: white
+        }
+
+        .cart-drawer {
+            position: fixed;
+            right: 22px;
+            top: 70px;
+            width: 380px;
+            background: linear-gradient(180deg, rgba(8, 10, 30, 0.98), rgba(4, 6, 18, 0.98));
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            z-index: 999
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+            align-items: center
+        }
+
+        .cart-item .qty {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .cart-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            margin-top: 28px;
+            font-size: 13px
+        }
+
+        @media(max-width:960px) {
+            main {
+                grid-template-columns: 1fr
+            }
+
+            .logo .title {
+                font-size: 18px
+            }
+
+            .searchbar input {
+                min-width: 80px
+            }
+        }
+    </style>
+</head>
+
+<body class="stars">
+    <div class="wrap">
+        <header>
+            <div class="logo">
+                <div class="mark">TH</div>
+                <div class="text">
+                    <div class="title">TenderHub</div>
+                    <div class="sub">Кыргызстан · Маркетинг &amp; Дүкөн</div>
+                </div>
+            </div>
+
+            <nav>
+                <a class="nav-link">Башкы</a>
+                <a class="nav-link">Каталог</a>
+                <a class="nav-link">Байланыш</a>
+                <div style="width:18px"></div>
+                <div class="searchbar">
+                    <input id="search" placeholder="Издөө: футболка, аксессуар..." />
+                    <button id="searchBtn" class="btn ghost">Издөө</button>
+                </div>
+                <button id="wh" class="btn ghost" title="WhatsApp">WhatsApp</button>
+                <button id="tg" class="btn ghost" title="Telegram">Telegram</button>
+                <div class="cart-toggle">
+                    <button id="openCart" class="btn">Корзина</button>
+                    <div id="cartCount" class="cart-count" style="display:none">0</div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <aside>
+                <div class="hero">
+                    <h1>Holders стил — TenderHub</h1>
+                    <p>Тункү көк жана фиолет фон, жылдыздары менен — кирилл алфавити. Биздин демо дүкөн.</p>
+                </div>
+                <h4>Региондор</h4>
+                <div class="regions" id="regions"></div>
+
+                <h4 style="margin-top:12px">Категориялар</h4>
+                <div class="chips" id="categoryChips">
+                    <div class="chip active" data-cat="all">БАРЫСЫ</div>
+                    <div class="chip" data-cat="fashion">Кийим</div>
+                    <div class="chip" data-cat="electronics">Электроника</div>
+                    <div class="chip" data-cat="home">Үй</div>
+                    <div class="chip" data-cat="gifts">Сыйлыктар</div>
+                </div>
+
+                <h4 style="margin-top:12px">Фирмен стиль</h4>
+                <p style="color:var(--muted);font-size:13px">Түстөр — көк/фиолет, логотип TH (өзгөртө аласың). Принт
+                    файлдар керек болсо презентацияны жүктө.</p>
+            </aside>
+
+            <section>
+                <div class="top-controls">
+                    <div>
+                        <strong style="font-size:18px">Каталог</strong>
+                        <div style="color:var(--muted);font-size:13px">Популярдуу товарлар — Holders стилинде</div>
+                    </div>
+                    <div style="display:flex;gap:10px;align-items:center">
+                        <label style="color:var(--muted);font-size:13px">Сорттоо</label>
+                        <select id="sort"
+                            style="padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--text)">
+                            <option value="pop">Популярдуулук</option>
+                            <option value="price-asc">Баасы: төмөндөн жогору</option>
+                            <option value="price-desc">Баасы: жогорудан төмөнгө</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="grid" class="grid"></div>
+            </section>
+        </main>
+
+        <footer>© TenderHub — Демонстрация. Бардык укуктар сакталат.</footer>
+    </div>
+
+    <!-- Cart Drawer (hidden by default) -->
+    <div id="cartDrawer" class="cart-drawer" style="display:none">
+        <h3>Корзина</h3>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <strong>Жалпы:</strong>
+            <strong id="cartTotal">0 сом</strong>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+            <button id="checkoutBtn" class="btn">Буйрутма берүү</button>
+            <button id="closeCart" class="btn ghost">Жабуу</button>
+        </div>
+    </div>
+
+    <script>
+        /* ========== Demo data ========== */
+        const PRODUCTS = [
+            { id: 1, title: 'TenderHub кружка — металл', cat: 'gifts', price: 450, desc: 'Стильдүү металл кружка, Кыргыз мотиви.', img: '☕' },
+            { id: 2, title: 'Киргиз футболка', cat: 'fashion', price: 1200, desc: 'Жогорку сапаттагы футболка, бардык өлчөмдөр.', img: '👕' },
+            { id: 3, title: 'USB Power Bank 10000mAh', cat: 'electronics', price: 1800, desc: 'Күчтүү банк — сапаттуу жана жеңил.', img: '🔋' },
+            { id: 4, title: 'Дизайн плакат A3', cat: 'home', price: 800, desc: 'Принт үчүн даяр файлдар (A3).', img: '🖼️' },
+            { id: 5, title: 'Holder аксессуары (клон)', cat: 'electronics', price: 650, desc: 'Кичинекей аксессуарлар — Holder стилине.', img: '🔌' },
+            { id: 6, title: 'Калем-журнал сет', cat: 'gifts', price: 350, desc: 'Презентацияга ылайыктуу промо комплект.', img: '📘' },
+            { id: 7, title: 'Спорт шорт', cat: 'fashion', price: 900, desc: 'Жеңил жана дем алчу материал.', img: '🏃‍♂️' }
+        ];
+
+        const REGIONS = ['Бишкек', 'Ош', 'Жалал-Абад', 'Баткен', 'Ысык-Көл', 'Нарын', 'Талас', 'Чүй'];
+
+        /* ========== State ========== */
+        let CART = JSON.parse(localStorage.getItem('tenderhub_cart') || '{}');
+
+        /* ========== Utilities ========== */
+        function saveCart() { localStorage.setItem('tenderhub_cart', JSON.stringify(CART)); renderCartCount(); }
+        function renderCartCount() { const qty = Object.values(CART).reduce((s, v) => s + v, 0); const el = document.getElementById('cartCount'); if (qty) { el.style.display = 'block'; el.textContent = qty; } else el.style.display = 'none'; }
+
+        /* ========== Render regions ========== */
+        const regionsEl = document.getElementById('regions');
+        REGIONS.forEach(r => {
+            const div = document.createElement('div'); div.className = 'region'; div.textContent = r;
+            div.onclick = () => { alert('Фильтр: ' + r + '\\n(Бул демо — чыныгы гео-фильтр кошулбайт)'); }
+            regionsEl.appendChild(div);
+        });
+
+        /* ========== Render products ========== */
+        const grid = document.getElementById('grid');
+        function renderProducts(list) {
+            grid.innerHTML = '';
+            list.forEach(p => {
+                const c = document.createElement('div'); c.className = 'card';
+                c.innerHTML = `
+      <div class="thumb">${p.img}</div>
+      <div class="title">${p.title}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="meta">
+        <div class="price">${p.price} сом</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn ghost" onclick="openDetail(${p.id})">Көрүү</button>
+          <button class="btn" onclick="addToCart(${p.id})">Кошуу</button>
+        </div>
+      </div>
+    `;
+                grid.appendChild(c);
+            });
+        }
+
+        /* ========== Detail modal (simple alert demo) ========== */
+        function openDetail(id) {
+            const p = PRODUCTS.find(x => x.id == id);
+            if (!p) return;
+            // Простая детальная карточка — можно заменить модальным окном HTML
+            const ok = confirm(p.title + '\\n' + p.desc + '\\n\\nКошууну каалайсызбы?');
+            if (ok) addToCart(id);
+        }
+
+        /* ========== Cart functions ========== */
+        function addToCart(id) {
+            CART[id] = (CART[id] || 0) + 1;
+            saveCart();
+            renderCart();
+            openCartDrawer();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems'); container.innerHTML = '';
+            let total = 0;
+            for (const id in CART) {
+                const qty = CART[id]; const p = PRODUCTS.find(x => x.id == id); if (!p) continue;
+                total += p.price * qty;
+                const div = document.createElement('div'); div.className = 'cart-item';
+                div.innerHTML = `
+      <div style="width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center">${p.img}</div>
+      <div style="flex:1">
+        <div style="font-weight:700">${p.title}</div>
+        <div style="color:var(--muted);font-size:13px">${p.price} сом × ${qty}</div>
+      </div>
+      <div class="qty" style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn ghost" onclick="inc(${id})">+</button>
+        <button class="btn ghost" onclick="dec(${id})">-</button>
+      </div>
+    `;
+                container.appendChild(div);
+            }
+            document.getElementById('cartTotal').textContent = total + ' сом';
+            renderCartCount();
+        }
+
+        function inc(id) { CART[id] = (CART[id] || 0) + 1; saveCart(); renderCart(); }
+        function dec(id) { if (!CART[id]) return; CART[id]--; if (CART[id] <= 0) delete CART[id]; saveCart(); renderCart(); }
+
+        /* ========== Cart drawer UI ========== */
+        const cartDrawer = document.getElementById('cartDrawer');
+        function openCartDrawer() { renderCart(); cartDrawer.style.display = 'block'; }
+        document.getElementById('openCart').onclick = openCartDrawer;
+        document.getElementById('closeCart').onclick = () => cartDrawer.style.display = 'none';
+
+        /* ========== Checkout (opens WhatsApp with order summary) ========== */
+        document.getElementById('checkoutBtn').onclick = () => {
+            if (Object.keys(CART).length === 0) { alert('Корзина бош — товар кошуңуз'); return; }
+            const name = prompt('Атыңызды киргизиңиз'); if (!name) { alert('Атыңды киргиз'); return; }
+            const phone = prompt('Телефон номериңиз'); if (!phone) { alert('Телефон киргиз'); return; }
+            const summary = Object.keys(CART).map(id => {
+                const p = PRODUCTS.find(x => x.id == id);
+                return p ? `${p.title} x ${CART[id]}` : '';
+            }).join('%0A');
+            const message = `Буйрутма%0A${summary}%0AАты: ${encodeURIComponent(name)}%0AТел: ${encodeURIComponent(phone)}`;
+            window.open('https://wa.me/?text=' + message, '_blank');
+        }
+
+        /* ========== Filters & Search ========= */
+        document.getElementById('categoryChips').addEventListener('click', e => {
+            const chip = e.target.closest('.chip'); if (!chip) return;
+            Array.from(document.querySelectorAll('.chip')).forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const cat = chip.dataset.cat;
+            if (cat === 'all') renderProducts(PRODUCTS);
+            else renderProducts(PRODUCTS.filter(p => p.cat === cat));
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const q = document.getElementById('search').value.trim().toLowerCase();
+            if (!q) return renderProducts(PRODUCTS);
+            renderProducts(PRODUCTS.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)));
+        });
+
+        /* sort */
+        document.getElementById('sort').addEventListener('change', e => {
+            const v = e.target.value; let arr = [...PRODUCTS];
+            if (v === 'price-asc') arr.sort((a, b) => a.price - b.price);
+            if (v === 'price-desc') arr.sort((a, b) => b.price - a.price);
+            renderProducts(arr);
+        });
+
+        /* WhatsApp / Telegram quick */
+        document.getElementById('wh').addEventListener('click', () => {
+            window.open('https://wa.me/?text=' + encodeURIComponent('Салам, мен TenderHub аркылуу суроо бар'), '_blank');
+        });
+        document.getElementById('tg').addEventListener('click', () => {
+            window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('Салам, сураныч жардам бериңиз'), '_blank');
+        });
+
+        /* init */
+        renderProducts(PRODUCTS);
+        renderCartCount();
+        renderCart();
+    </script>
+</body>
+
+</html>
